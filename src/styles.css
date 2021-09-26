@@ -1,4 +1,96 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font: "Inter", sans-serif;
+  --light: #eee;
+  --grey: #dbdbdb;
+  --greyer: #a9abba;
+  --dark: #222222;
+  --darker: #121640;
+  --blue: #0092db;
+  --blue-dark: #027bb8;
+  --yellow: #dbdb01;
+  --yellow-dark: #c0c003;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--dark);
+  height: 100vh;
+  width: 100%;
+}
+
+.sticky {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  border-bottom: solid 0.05em #0092db;
+  padding: 1em;
+  top: 0;
+}
+
+.posts__container {
+  margin: 1em;
+  margin-top: 10em;
+  margin-bottom: 4em;
+}
+
+.options {
+  margin: 1em 0;
+}
+
+.button {
+  min-width: 6em;
+  background: var(--blue);
+  color: var(--light);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  border: none;
+  margin: 0 0.5em;
+  cursor: pointer;
+}
+
+.button--active,
+.button:hover {
+  background: var(--blue-dark);
+}
+
+.button--cta {
+  color: var(--dark);
+  background-color: var(--yellow);
+}
+.button--reply:hover {
+  background-color: var(--yellow-dark);
+}
+
+.new-post {
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  width: 80%;
+  border: solid 0.05em var(--blue-dark);
+  border-radius: 0.5em 0 0 0;
+  transition: all 0.5s ease-out;
+}
+
+.new-post--close {
+  bottom: -20em;
+}
+
+.new-post textarea {
+  width: 100%;
+  border: solid 0.05em var(--blue-dark);
+  border-radius: 0.5em;
+  padding: 1em;
+  font: var(--font);
 }
