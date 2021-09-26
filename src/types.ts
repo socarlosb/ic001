@@ -23,3 +23,4 @@ export interface IApiRequest {
     comment: string;
     validated: boolean;
 }
+export type Tfilter = "validated" | "all";
