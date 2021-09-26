@@ -1,6 +1,9 @@
 # ic001
 
-A discussion thread using infinite scroll (a reactjs execise)
+A discussion thread using infinite scroll (a reactjs execise).
+You can see a result in https://confident-montalcini-7c0ad1.netlify.app/
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fbc25464-343b-498e-932a-e96defdd43cc/deploy-status)](https://app.netlify.com/sites/confident-montalcini-7c0ad1/deploys)
 
 ## use cases
 
