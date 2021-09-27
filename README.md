@@ -48,7 +48,7 @@ validated (boolean)
 ## things to consider
 
 - functionality
-- react stat
+- react client state
 - code structure
 - file structure
 - ui
