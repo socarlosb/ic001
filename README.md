@@ -62,3 +62,12 @@ validated (boolean)
 [HTML Symbols](https://www.toptal.com/designers/htmlarrows/)
 
 [CSS box-shadow examples](https://getcssscan.com/css-box-shadow-examples)
+
+## next tasks
+
+- ~~add the 'Comments' title~~
+- ~~change NewPost semantic to `<form>`~~
+- ~~add a dropdown with pages~~
+- implement `virtuoso`
+- save _last read_ post in `sessionStorage`
+- save _reply_ in `sessionStorage` !?
