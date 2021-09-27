@@ -1,0 +1,23 @@
+.new-post {
+	padding: 1em;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background-color: white;
+	width: 80%;
+	border: solid 0.05em var(--blue-dark);
+	border-radius: 0.5em 0 0 0;
+	transition: all 0.5s ease-out;
+}
+
+.new-post--close {
+	bottom: -20em;
+}
+
+.new-post textarea {
+	width: 100%;
+	border: solid 0.05em var(--blue-dark);
+	border-radius: 0.5em;
+	padding: 1em;
+	font: var(--font);
+}

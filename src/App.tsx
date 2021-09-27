@@ -4,6 +4,7 @@ import { addPost, getPosts } from "./utils/api";
 import { IPost, Tfilter, IApiRequest } from "./types";
 import { Post } from "./components/Post";
 import { Loader } from "./components/Loader";
+import { NewPost } from "./components/NewPost";
 
 export default function App() {
 	const [posts, setPosts] = useState<IPost[]>([]);
@@ -91,35 +92,13 @@ export default function App() {
 				)}
 			</section>
 
-			<section className={`new-post ${!showNewPost ? "new-post--close" : ""}`}>
-				<textarea
-					autoFocus
-					spellCheck
-					placeholder="Write a message here..."
-					name="new-post"
-					rows={6}
-					onChange={(e) =>
-						setCreateNewPost({ ...createNewPost, comment: e?.target?.value })
-					}
-					value={createNewPost?.comment}
-				></textarea>
-				<div className="options">
-					<button
-						type="button"
-						className="button button--cta"
-						onClick={sendNewPost}
-					>
-						Send
-					</button>
-					<button
-						type="button"
-						className="button"
-						onClick={() => setShowNewPost(!showNewPost)}
-					>
-						Cancel
-					</button>
-				</div>
-			</section>
+			<NewPost
+				createNewPost={createNewPost}
+				sendNewPost={sendNewPost}
+				setCreateNewPost={setCreateNewPost}
+				setShowNewPost={setShowNewPost}
+				showNewPost={showNewPost}
+			></NewPost>
 		</div>
 	);
 }
