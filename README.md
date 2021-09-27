@@ -60,4 +60,5 @@ validated (boolean)
 ## notes
 
 [HTML Symbols](https://www.toptal.com/designers/htmlarrows/)
+
 [CSS box-shadow examples](https://getcssscan.com/css-box-shadow-examples)
