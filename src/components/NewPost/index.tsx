@@ -17,33 +17,53 @@ export const NewPost: React.FC<Props> = ({
 	sendNewPost,
 }) => {
 	return (
-		<section className={`new-post ${!showNewPost ? "new-post--close" : ""}`}>
-			<header className="new-post__header">
-				<h5>&#10554; Invest in local food and susainability</h5>
-				<button
-					type="button"
-					className="button--close"
+		<section className={`new-post ${!showNewPost ? "new-post--closed" : ""}`}>
+			{!showNewPost ? (
+				<header
+					className="new-post__header"
 					onClick={() => setShowNewPost(!showNewPost)}
 				>
-					&#x25bc;
-				</button>
-			</header>
-			<textarea
-				autoFocus
-				spellCheck
-				placeholder="Write a message here..."
-				name="new-post"
-				rows={6}
-				onChange={(e) =>
-					setCreateNewPost({ ...createNewPost, comment: e?.target?.value })
-				}
-				value={createNewPost?.comment}
-			></textarea>
-			<div className="actions">
-				<button type="button" className="button" onClick={sendNewPost}>
-					Send
-				</button>
-			</div>
+					<button type="button" className="button--light">
+						Reply
+					</button>
+					<button type="button" className="button--light">
+						&#9650;
+					</button>
+				</header>
+			) : (
+				<header
+					className="new-post__header"
+					onClick={() => setShowNewPost(!showNewPost)}
+				>
+					<h5>The most amazing post title!</h5>
+					<button type="button" className="button--light">
+						&#x25bc;
+					</button>
+				</header>
+			)}
+			<form
+				onSubmit={(e: React.SyntheticEvent) => {
+					e.preventDefault();
+					sendNewPost();
+				}}
+			>
+				<textarea
+					autoFocus
+					spellCheck
+					placeholder="Write a message here..."
+					name="new-post"
+					rows={6}
+					onChange={(e) =>
+						setCreateNewPost({ ...createNewPost, comment: e?.target?.value })
+					}
+					value={createNewPost?.comment}
+				></textarea>
+				<div className="actions">
+					<button type="submit" className="button">
+						Send
+					</button>
+				</div>
+			</form>
 		</section>
 	);
 };

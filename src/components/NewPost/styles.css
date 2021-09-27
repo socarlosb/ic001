@@ -15,30 +15,28 @@
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0 0.5em;
+	padding: 1em 0;
+	cursor: pointer;
 }
 
-.new-post--close {
-	bottom: -20em;
+/* this could be better... */
+.new-post--closed {
+	bottom: -14em;
+}
+
+.new-post--closed:hover {
+	bottom: -12em;
 }
 
 .new-post textarea {
 	width: 100%;
-	border: solid 0.05em var(--blue-dark);
+	border: solid 0.05em var(--grey);
 	border-radius: 0.5em;
 	padding: 1em;
 	font: var(--font);
+	color: var(--greyer);
 }
-
-.button--close {
-	color: var(--blue-dark);
-	padding: 1em;
-	opacity: 0.8;
-	border: none;
-	background-color: transparent;
-}
-
-.button--close:hover {
-	background-color: var(--grey);
-	opacity: 1;
+.new-post textarea:hover {
+	border: solid 0.05em var(--greyer);
+	color: var(--dark);
 }
