@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from 'date-fns'
+
 export const parseDate = (date: string) => {
-	return date.split("T")[0];
+	return formatDistanceToNow(new Date(date), { addSuffix: true });
 };
