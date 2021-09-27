@@ -1,4 +1,4 @@
-import "./post.css";
+import "./styles.css";
 import { IPost } from "../../types";
 import { parseDate } from "../../utils/helper";
 import { Social } from "../Social";

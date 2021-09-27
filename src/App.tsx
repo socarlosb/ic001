@@ -5,6 +5,7 @@ import { IPost, Tfilter, IApiRequest } from "./types";
 import { Post } from "./components/Post";
 import { Loader } from "./components/Loader";
 import { NewPost } from "./components/NewPost";
+import { Actions } from "./components/Actions";
 
 export default function App() {
 	const [posts, setPosts] = useState<IPost[]>([]);
@@ -56,32 +57,12 @@ export default function App() {
 		<div>
 			<header className="sticky">
 				<h1>Discussion to the infinity</h1>
-				<section className="options">
-					<button
-						type="button"
-						className={`button
-					${filter == "all" ? "button--active" : ""}`}
-						onClick={() => setFilter("all")}
-					>
-						All
-					</button>
-					<button
-						type="button"
-						className={`button ${
-							filter == "validated" ? "button--active" : ""
-						}`}
-						onClick={() => setFilter("validated")}
-					>
-						Active
-					</button>
-					<button
-						type="button"
-						className="button button--cta"
-						onClick={() => setShowNewPost(!showNewPost)}
-					>
-						Reply
-					</button>
-				</section>
+				<Actions
+					filter={filter}
+					setFilter={setFilter}
+					showNewPost={showNewPost}
+					setShowNewPost={setShowNewPost}
+				></Actions>
 			</header>
 
 			<section className="posts__container">

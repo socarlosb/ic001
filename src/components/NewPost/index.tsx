@@ -1,5 +1,5 @@
+import "./styles.css";
 import { IApiRequest } from "../../types";
-import "./new-post.css";
 
 interface Props {
 	showNewPost: boolean;

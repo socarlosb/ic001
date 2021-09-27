@@ -44,10 +44,7 @@ body {
 	margin-bottom: 4em;
 }
 
-.options {
-	margin: 1em 0;
-}
-
+/* Global buttons style */
 .button {
 	min-width: 6em;
 	background: var(--blue);

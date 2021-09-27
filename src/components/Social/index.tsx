@@ -1,4 +1,4 @@
-import "./social.css";
+import "./styles.css";
 import { ReactComponent as Thumbs } from "./thumbs.svg";
 import { ReactComponent as Share } from "./share.svg";
 import { ReactComponent as Dots } from "./dots.svg";
