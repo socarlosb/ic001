@@ -1,22 +1,67 @@
 import "./styles.css";
-import { Tfilter } from "../../types";
+import { IPages, Tfilter } from "../../types";
 
 interface Props {
-	filter: Tfilter;
+	// filter: Tfilter;
 	setFilter: (value: React.SetStateAction<Tfilter>) => void;
-	showNewPost: boolean;
-	setShowNewPost: (value: React.SetStateAction<boolean>) => void;
+	page: IPages;
+	setPage: (value: React.SetStateAction<IPages>) => void;
 }
 
 export const Actions: React.FC<Props> = ({
-	filter,
+	// filter,
 	setFilter,
-	showNewPost,
-	setShowNewPost,
+	page,
+	setPage,
 }) => {
+	const handleFilterSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		switch (e.target.value) {
+			case "all":
+				setFilter("all");
+				break;
+			case "validated":
+				setFilter("validated");
+				break;
+			default:
+				setFilter("all");
+				break;
+		}
+	};
+	const handlePageSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setPage({ ...page, current: Number(e.target.value) });
+	};
 	return (
 		<section className="actions">
-			<button
+			<label htmlFor="selectedFilter">Show:</label>
+			<select
+				onChange={handleFilterSelection}
+				className="dropdown"
+				title="Filter type"
+				id="selectedFilter"
+			>
+				<option selected value="all">
+					All
+				</option>
+				<option value="validated">Validated</option>
+			</select>
+			<label htmlFor="selectedPage">Page:</label>
+			<select
+				onChange={handlePageSelection}
+				defaultValue={page.current}
+				className="dropdown"
+				title="Page number"
+				id="selectedPage"
+			>
+				{[...Array(page.total)].map((_, idx: number) => {
+					return (
+						<option key={idx} value={idx + 1}>
+							{idx + 1}
+						</option>
+					);
+				})}
+			</select>
+
+			{/* <button
 				type="button"
 				className={`button
 					${filter == "all" ? "button--active" : ""}`}
@@ -38,6 +83,12 @@ export const Actions: React.FC<Props> = ({
 			>
 				Reply
 			</button>
+			<label htmlFor="page number">Page:</label>
+			<select className="button" title="Page Number" name="page number">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+			</select> */}
 		</section>
 	);
 };

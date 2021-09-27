@@ -1,7 +1,7 @@
 import "./styles.css";
 import { useState, useEffect, useRef } from "react";
 import { addPost, getPosts } from "./utils/api";
-import { IPost, Tfilter, IApiRequest } from "./types";
+import { IPost, Tfilter, IApiRequest, IPages } from "./types";
 import { Post } from "./components/Post";
 import { Loader } from "./components/Loader";
 import { NewPost } from "./components/NewPost";
@@ -10,6 +10,10 @@ import { Actions } from "./components/Actions";
 export default function App() {
 	const [posts, setPosts] = useState<IPost[]>([]);
 	const [loading, setLoading] = useState(false);
+	const [page, setPage] = useState<IPages>({
+		current: 0,
+		total: 0,
+	});
 	const [filter, setFilter] = useState<Tfilter>("all");
 	const [showNewPost, setShowNewPost] = useState(false);
 
@@ -28,8 +32,9 @@ export default function App() {
 		const getData = async () => {
 			try {
 				setLoading(true);
-				const data = await getPosts(0, filter);
+				const data = await getPosts(page.current, filter);
 				setPosts(data?.posts || []);
+				setPage({ current: data?.page || 0, total: data?.total_pages || 0 });
 				setLoading(false);
 			} catch (error) {
 				console.info("error", error);
@@ -37,7 +42,7 @@ export default function App() {
 			}
 		};
 		getData();
-	}, [filter]);
+	}, [filter, page.current]);
 
 	const sendNewPost = async () => {
 		try {
@@ -57,15 +62,11 @@ export default function App() {
 		<div>
 			<header className="sticky">
 				<h1>Discussion to the infinity</h1>
-				<Actions
-					filter={filter}
-					setFilter={setFilter}
-					showNewPost={showNewPost}
-					setShowNewPost={setShowNewPost}
-				></Actions>
+				<Actions setFilter={setFilter} page={page} setPage={setPage}></Actions>
 			</header>
 
 			<section className="posts__container">
+				<h2>Comments</h2>
 				{loading ? (
 					<Loader />
 				) : (

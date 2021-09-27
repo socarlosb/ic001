@@ -1,1 +1,7 @@
-
+.dropdown {
+	border: none;
+	outline: none;
+	font-family: var(--font);
+	font-size: 1em;
+	margin-right: 1em;
+}

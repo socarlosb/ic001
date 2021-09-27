@@ -50,13 +50,12 @@ body {
 
 /* Global buttons style */
 .button {
-	min-width: 8em;
 	background: var(--blue);
 	color: var(--light);
-	padding: 1em 1.5em;
+	padding: 0.5em 2em;
 	border-radius: 0.5em;
 	border: none;
-	margin: 0 0.5em 0 0;
+	margin: 0 0.2em 0 0;
 	cursor: pointer;
 }
 
@@ -65,11 +64,13 @@ body {
 	background: var(--blue-dark);
 }
 
-.button--cta {
-	color: var(--dark);
-	background-color: var(--yellow);
+.button--light {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: var(--greyer);
 }
 
-.button--cta:hover {
-	background-color: var(--yellow-dark);
+.button--light:hover {
+	color: var(--dark);
 }
