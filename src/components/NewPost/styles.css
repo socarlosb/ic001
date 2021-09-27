@@ -1,5 +1,5 @@
 .new-post {
-	padding: 1em;
+	padding: 0.5em 1em;
 	position: fixed;
 	bottom: 0;
 	right: 0;
@@ -8,6 +8,14 @@
 	border: solid 0.05em var(--blue-dark);
 	border-radius: 0.5em 0 0 0;
 	transition: all 0.5s ease-out;
+}
+
+.new-post__header {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0.5em;
 }
 
 .new-post--close {
@@ -20,4 +28,17 @@
 	border-radius: 0.5em;
 	padding: 1em;
 	font: var(--font);
+}
+
+.button--close {
+	color: var(--blue-dark);
+	padding: 1em;
+	opacity: 0.8;
+	border: none;
+	background-color: transparent;
+}
+
+.button--close:hover {
+	background-color: var(--grey);
+	opacity: 1;
 }

@@ -44,15 +44,19 @@ body {
 	margin-bottom: 4em;
 }
 
+.actions {
+	margin: 1em 0;
+}
+
 /* Global buttons style */
 .button {
-	min-width: 6em;
+	min-width: 8em;
 	background: var(--blue);
 	color: var(--light);
-	padding: 0.5em 1em;
+	padding: 1em 1.5em;
 	border-radius: 0.5em;
 	border: none;
-	margin: 0 0.5em;
+	margin: 0 0.5em 0 0;
 	cursor: pointer;
 }
 

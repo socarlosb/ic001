@@ -18,6 +18,16 @@ export const NewPost: React.FC<Props> = ({
 }) => {
 	return (
 		<section className={`new-post ${!showNewPost ? "new-post--close" : ""}`}>
+			<header className="new-post__header">
+				<h5>&#10554; Invest in local food and susainability</h5>
+				<button
+					type="button"
+					className="button--close"
+					onClick={() => setShowNewPost(!showNewPost)}
+				>
+					&#x25bc;
+				</button>
+			</header>
 			<textarea
 				autoFocus
 				spellCheck
@@ -29,20 +39,9 @@ export const NewPost: React.FC<Props> = ({
 				}
 				value={createNewPost?.comment}
 			></textarea>
-			<div className="options">
-				<button
-					type="button"
-					className="button button--cta"
-					onClick={sendNewPost}
-				>
+			<div className="actions">
+				<button type="button" className="button" onClick={sendNewPost}>
 					Send
-				</button>
-				<button
-					type="button"
-					className="button"
-					onClick={() => setShowNewPost(!showNewPost)}
-				>
-					Cancel
 				</button>
 			</div>
 		</section>

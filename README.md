@@ -56,3 +56,8 @@ validated (boolean)
 - typescript
 - [virtualized list component](https://virtuoso.dev/) (althought it seems there is a limit of 1032443 items 🤔)
   - add option to resume reading? (or select specific page)
+
+## notes
+
+[HTML Symbols](https://www.toptal.com/designers/htmlarrows/)
+[CSS box-shadow examples](https://getcssscan.com/css-box-shadow-examples)
