@@ -1,7 +1,7 @@
 # ic001
 
 A discussion thread using infinite scroll (a ReactJS exercise).
-You can see a result in https://confident-montalcini-7c0ad1.netlify.app/
+You can see a result in <a href="https://confident-montalcini-7c0ad1.netlify.app/" target="_blank">confident-montalcini-7c0ad1.netlify.app</a>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fbc25464-343b-498e-932a-e96defdd43cc/deploy-status)](https://app.netlify.com/sites/confident-montalcini-7c0ad1/deploys)
 
