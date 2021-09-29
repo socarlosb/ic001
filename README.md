@@ -70,6 +70,6 @@ validated (boolean)
 - ~~add a dropdown with pages~~
 - ~~implement `virtuoso`~~
 - ~~save _last read_ post in `sessionStorage`~~
-- save _reply_ in `sessionStorage`
-- check issue of duplicate requests (duplicate posts)
-- navigate to saved _last read_ is having 🐛
+- ~~save _reply_ in `sessionStorage`~~
+- ~~check issue of duplicate requests (duplicate posts)~~
+- ~~navigate to saved _last read_ is having 🐛~~
