@@ -3,5 +3,10 @@
 	outline: none;
 	font-family: var(--font);
 	font-size: 1em;
-	margin-right: 1em;
+	margin: 0.5em;
+	padding: 0.5em;
+}
+.dropdown:hover {
+	background-color: var(--grey);
+	border-radius: 0.5em;
 }
