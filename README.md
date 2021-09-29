@@ -72,4 +72,4 @@ validated (boolean)
 - ~~save _last read_ post in `sessionStorage`~~
 - save _reply_ in `sessionStorage`
 - check issue of duplicate requests (duplicate posts)
-- navigate to saved \__last read_ is having 🐛
+- navigate to saved _last read_ is having 🐛
