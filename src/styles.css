@@ -21,31 +21,40 @@
 	--yellow-dark: #c0c003;
 }
 
+#root {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
 body {
 	font-family: var(--font);
 	color: var(--dark);
 	height: 100vh;
 	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 .sticky {
 	position: fixed;
+	z-index: 1;
+	height: 8em;
 	width: 100%;
 	background-color: white;
-	padding: 1em;
-	top: 0;
-	left: 0;
+	padding-top: 1em;
+	padding-left: 1em;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .posts__container {
-	margin: 1em;
-	margin-top: 12em;
-	margin-bottom: 4em;
+	flex-grow: 1;
+	padding: 1em;
+	margin-top: 8em;
 }
 
 .actions {
-	margin: 1em 0;
+	padding: 1em 0;
 }
 
 /* Global buttons style */
@@ -73,4 +82,22 @@ body {
 
 .button--light:hover {
 	color: var(--dark);
+}
+
+.button--clean {
+	background-color: transparent;
+	border: none;
+	padding: 1em 2em;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.button--clean:hover {
+	color: var(--blue);
+}
+
+.scroll-footer {
+	width: 100%;
+	height: 8em;
+	text-align: center;
 }

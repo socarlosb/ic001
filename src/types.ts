@@ -24,9 +24,4 @@ export interface IApiRequest {
 	validated: boolean;
 }
 
-export interface IPages {
-	current: number,
-	total: number
-}
-
 export type Tfilter = "validated" | "all";
