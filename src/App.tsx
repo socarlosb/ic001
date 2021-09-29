@@ -9,7 +9,7 @@ import { IPost, Tfilter, IApiRequest } from "./types";
 
 export default function App() {
 	const [posts, setPosts] = useState<IPost[]>([]);
-	const [nextPage, setNextPage] = useState<number | null>(0);
+	const [nextPage, setNextPage] = useState<number | null>(1);
 	const [filter, setFilter] = useState<Tfilter>("all");
 	const [showNewPost, setShowNewPost] = useState(false);
 	const [visibleRange, setVisibleRange] = useState(0);
@@ -48,28 +48,30 @@ export default function App() {
 		}
 	}, [visibleRange]);
 
-	const loadMore = useCallback(() => {
-		return setTimeout(async () => {
-			try {
-				if (nextPage === null) return;
-				const data = await getPosts(nextPage, "all");
-				if (data) {
-					const newNextPage = data?.next_page;
-					setNextPage(newNextPage);
-					setPosts((oldPosts) => [...oldPosts, ...data?.posts]);
-					totalPosts.current = data.total;
-				}
-			} catch (error) {
-				console.info("error", error);
-				console.info("----------------");
+	const onLoadMore = useCallback(async () => {
+		// return setTimeout(async () => {
+		try {
+			if (nextPage === null) return;
+			const data = await getPosts(nextPage, "all");
+			if (data) {
+				const newNextPage = data?.next_page;
+				setNextPage(newNextPage);
+				setPosts((oldPosts) => [...oldPosts, ...data?.posts]);
+				totalPosts.current = data.total;
 			}
-		}, 200);
+		} catch (error) {
+			console.info("error", error);
+			console.info("----------------");
+		}
+
+		// }, 200);
 	}, [setPosts, nextPage]);
 
 	useEffect(() => {
-		const timeout = loadMore();
-		return () => clearTimeout(timeout);
-	}, []);
+		onLoadMore();
+		// const timeout = onLoadMore();
+		// return () => clearTimeout(timeout);
+	}, [setPosts, nextPage]);
 
 	const sendNewPost = async () => {
 		try {
@@ -109,7 +111,7 @@ export default function App() {
 					posts={posts}
 					virtuosoRef={virtuosoRef}
 					setVisibleRange={setVisibleRange}
-					loadMore={loadMore}
+					onLoadMore={onLoadMore}
 				></PostList>
 			</section>
 

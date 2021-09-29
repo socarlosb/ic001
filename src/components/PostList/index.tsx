@@ -6,9 +6,9 @@ interface Props {
 	virtuosoRef: React.MutableRefObject<VirtuosoHandle | null>;
 	posts: IPost[];
 	filter: Tfilter;
-	loadMore: () => NodeJS.Timeout;
-	setVisibleRange: (value: React.SetStateAction<number>) => void;
 	nextPage: number | null;
+	onLoadMore: () => Promise<void>;
+	setVisibleRange: (value: React.SetStateAction<number>) => void;
 }
 
 export const PostList: React.FC<Props> = ({
@@ -16,7 +16,7 @@ export const PostList: React.FC<Props> = ({
 	posts,
 	filter,
 	nextPage,
-	loadMore,
+	onLoadMore,
 	setVisibleRange,
 }) => {
 	return (
@@ -26,8 +26,8 @@ export const PostList: React.FC<Props> = ({
 				data={posts.filter((item: IPost) =>
 					filter === "validated" ? item.validated === true : item
 				)}
-				endReached={loadMore}
-				overscan={10}
+				endReached={onLoadMore}
+				overscan={5}
 				itemContent={(_, post) => {
 					return <Post key={post.id} info={post} />;
 				}}
