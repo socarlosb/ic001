@@ -28,10 +28,10 @@ export default function App() {
 	});
 
 	useEffect(() => {
-		const previousVisible = JSON.parse(
-			sessionStorage.getItem("visibleRange") || ""
-		);
-		if (previousVisible) {
+		if (sessionStorage.getItem("visibleRange") !== null) {
+			const previousVisible = JSON.parse(
+				sessionStorage.getItem("visibleRange") || ""
+			);
 			setVisibleRange(previousVisible);
 			if (virtuoso.current) {
 				virtuoso.current.scrollToIndex({
@@ -60,13 +60,18 @@ export default function App() {
 
 	const loadMore = useCallback(() => {
 		return setTimeout(async () => {
-			if (nextPage === null) return;
-			const data = await fetchData(nextPage);
-			if (data) {
-				const newNextPage = data?.next_page;
-				setNextPage(newNextPage);
-				setPosts((oldPosts) => [...oldPosts, ...data?.posts]);
-				totalPosts.current = data.total;
+			try {
+				if (nextPage === null) return;
+				const data = await fetchData(nextPage);
+				if (data) {
+					const newNextPage = data?.next_page;
+					setNextPage(newNextPage);
+					setPosts((oldPosts) => [...oldPosts, ...data?.posts]);
+					totalPosts.current = data.total;
+				}
+			} catch (error) {
+				console.info("error", error);
+				console.info("----------------");
 			}
 		}, 200);
 	}, [setPosts, nextPage]);
