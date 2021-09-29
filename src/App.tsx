@@ -35,7 +35,7 @@ export default function App() {
 			setVisibleRange(previousVisible);
 			if (virtuosoRef.current) {
 				virtuosoRef.current.scrollToIndex({
-					index: previousVisible + 2,
+					index: previousVisible,
 					behavior: "smooth",
 				});
 			}
@@ -99,7 +99,6 @@ export default function App() {
 		<>
 			<header className="sticky">
 				<h1>Discussion to the infinity</h1>
-				<p>👁‍🗨 {visibleRange}</p>
 				<Actions setFilter={setFilter}></Actions>
 			</header>
 
