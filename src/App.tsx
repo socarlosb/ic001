@@ -1,11 +1,11 @@
 import "./styles.css";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Virtuoso, VirtuosoHandle } from "react-virtuoso";
-import { addPost, getPosts } from "./utils/api";
-import { IPost, Tfilter, IApiRequest } from "./types";
-import { Post } from "./components/Post";
+import { VirtuosoHandle } from "react-virtuoso";
 import { NewPost } from "./components/NewPost";
 import { Actions } from "./components/Actions";
+import { PostList } from "./components/PostList";
+import { addPost, getPosts } from "./utils/api";
+import { IPost, Tfilter, IApiRequest } from "./types";
 
 export default function App() {
 	const [posts, setPosts] = useState<IPost[]>([]);
@@ -13,7 +13,7 @@ export default function App() {
 	const [filter, setFilter] = useState<Tfilter>("all");
 	const [showNewPost, setShowNewPost] = useState(false);
 	const [visibleRange, setVisibleRange] = useState(0);
-	const virtuoso = useRef<VirtuosoHandle | null>(null);
+	const virtuosoRef = useRef<VirtuosoHandle | null>(null);
 	const totalPosts = useRef(0);
 
 	/**
@@ -33,8 +33,8 @@ export default function App() {
 				sessionStorage.getItem("visibleRange") || ""
 			);
 			setVisibleRange(previousVisible);
-			if (virtuoso.current) {
-				virtuoso.current.scrollToIndex({
+			if (virtuosoRef.current) {
+				virtuosoRef.current.scrollToIndex({
 					index: previousVisible + 2,
 					behavior: "smooth",
 				});
@@ -48,21 +48,11 @@ export default function App() {
 		}
 	}, [visibleRange]);
 
-	const fetchData = async (pageToFetch: number) => {
-		try {
-			const data = await getPosts(pageToFetch, "all");
-			return data;
-		} catch (error) {
-			console.info("error", error);
-			console.info("----------------");
-		}
-	};
-
 	const loadMore = useCallback(() => {
 		return setTimeout(async () => {
 			try {
 				if (nextPage === null) return;
-				const data = await fetchData(nextPage);
+				const data = await getPosts(nextPage, "all");
 				if (data) {
 					const newNextPage = data?.next_page;
 					setNextPage(newNextPage);
@@ -86,8 +76,8 @@ export default function App() {
 			const newData = await addPost(createNewPost);
 			const newPost = newData.posts;
 			setPosts([...posts, newPost]);
-			if (virtuoso.current) {
-				virtuoso.current.scrollToIndex({
+			if (virtuosoRef.current) {
+				virtuosoRef.current.scrollToIndex({
 					index:
 						posts.length < totalPosts.current
 							? totalPosts.current + 1
@@ -107,52 +97,20 @@ export default function App() {
 		<>
 			<header className="sticky">
 				<h1>Discussion to the infinity</h1>
-				<p>{visibleRange}</p>
+				<p>👁‍🗨 {visibleRange}</p>
 				<Actions setFilter={setFilter}></Actions>
 			</header>
 
 			<section className="posts__container">
 				<h2>Comments</h2>
-				<Virtuoso
-					ref={virtuoso}
-					data={posts.filter((item: IPost) =>
-						filter === "validated" ? item.validated === true : item
-					)}
-					endReached={loadMore}
-					overscan={10}
-					itemContent={(_, post) => {
-						return <Post key={post.id} info={post} />;
-					}}
-					rangeChanged={({ startIndex }) => {
-						setVisibleRange(startIndex);
-					}}
-					useWindowScroll
-					components={{
-						Footer: () => {
-							return nextPage ? (
-								<article className="scroll-footer">🚀 Getting more...</article>
-							) : (
-								<article className="scroll-footer">
-									<p>🤷‍♂️ I guess we don't have more data!</p>
-									<button
-										type="button"
-										className="button--clean"
-										onClick={() => {
-											if (virtuoso.current) {
-												virtuoso.current.scrollToIndex({
-													index: 0,
-													behavior: "smooth",
-												});
-											}
-										}}
-									>
-										Back to top
-									</button>
-								</article>
-							);
-						},
-					}}
-				/>
+				<PostList
+					filter={filter}
+					nextPage={nextPage}
+					posts={posts}
+					virtuosoRef={virtuosoRef}
+					setVisibleRange={setVisibleRange}
+					loadMore={loadMore}
+				></PostList>
 			</section>
 
 			<NewPost

@@ -1,7 +1,7 @@
 import "./styles.css";
-import { IPost } from "../../types";
-import { parseDate } from "../../utils/helper";
 import { Social } from "../Social";
+import { parseDate } from "../../utils/helper";
+import { IPost } from "../../types";
 
 interface Props {
 	info: IPost;
