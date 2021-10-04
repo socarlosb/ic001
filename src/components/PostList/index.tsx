@@ -27,7 +27,7 @@ export const PostList: React.FC<Props> = ({
 					filter === "validated" ? item.validated === true : item
 				)}
 				endReached={onLoadMore}
-				overscan={5}
+				overscan={200}
 				itemContent={(_, post) => {
 					return <Post key={post.id} info={post} />;
 				}}

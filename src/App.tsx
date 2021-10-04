@@ -13,6 +13,8 @@ export default function App() {
 	const [filter, setFilter] = useState<Tfilter>("all");
 	const [showNewPost, setShowNewPost] = useState(false);
 	const [visibleRange, setVisibleRange] = useState(0);
+
+	const oldPostVisibleRef = useRef<number>(0);
 	const virtuosoRef = useRef<VirtuosoHandle | null>(null);
 	const totalPosts = useRef(0);
 
@@ -27,29 +29,25 @@ export default function App() {
 		comment: "",
 	});
 
+	// check if there is a previous read post
 	useEffect(() => {
-		if (sessionStorage.getItem("visibleRange") !== null) {
+		if (localStorage.getItem("visibleRange") !== null) {
 			const previousVisible = JSON.parse(
-				sessionStorage.getItem("visibleRange") || ""
+				localStorage.getItem("visibleRange") || ""
 			);
-			setVisibleRange(previousVisible);
-			if (virtuosoRef.current) {
-				virtuosoRef.current.scrollToIndex({
-					index: previousVisible,
-					behavior: "smooth",
-				});
-			}
+			oldPostVisibleRef.current = previousVisible;
 		}
 	}, []);
 
+	// save the current viewed post
 	useEffect(() => {
 		if (nextPage !== 0) {
-			sessionStorage.setItem("visibleRange", JSON.stringify(visibleRange));
+			localStorage.setItem("visibleRange", JSON.stringify(visibleRange));
 		}
 	}, [visibleRange]);
 
-	const onLoadMore = useCallback(async () => {
-		// return setTimeout(async () => {
+	// fetch posts
+	const onFetchMore = useCallback(async () => {
 		try {
 			if (nextPage === null) return;
 			const data = await getPosts(nextPage, "all");
@@ -63,16 +61,20 @@ export default function App() {
 			console.info("error", error);
 			console.info("----------------");
 		}
-
-		// }, 200);
 	}, [setPosts, nextPage]);
 
 	useEffect(() => {
-		onLoadMore();
-		// const timeout = onLoadMore();
-		// return () => clearTimeout(timeout);
+		onFetchMore();
+		// Jump to last view post
+		if (virtuosoRef.current && posts.length > oldPostVisibleRef.current) {
+			virtuosoRef.current.scrollToIndex({
+				index: oldPostVisibleRef.current,
+				behavior: "smooth",
+			});
+		}
 	}, [setPosts, nextPage]);
 
+	// add new post
 	const sendNewPost = async () => {
 		try {
 			const newData = await addPost(createNewPost);
@@ -110,7 +112,7 @@ export default function App() {
 					posts={posts}
 					virtuosoRef={virtuosoRef}
 					setVisibleRange={setVisibleRange}
-					onLoadMore={onLoadMore}
+					onLoadMore={onFetchMore}
 				></PostList>
 			</section>
 
