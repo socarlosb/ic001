@@ -21,7 +21,7 @@ export const Post: React.FC<Props> = ({ info }) => {
 						</p>
 						<p className="post--date">{parseDate(info.postedOn)}</p>
 					</div>
-					<p className="user--comment">{info.comment.substr(0, 200) + "..."}</p>
+					<p className="user--comment">{info.comment}</p>
 				</div>
 			</div>
 			<Social />

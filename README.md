@@ -73,3 +73,16 @@ validated (boolean)
 - ~~save _reply_ in `sessionStorage`~~
 - ~~check issue of duplicate requests (duplicate posts)~~
 - ~~navigate to saved _last read_ is having 🐛~~
+
+# my notes
+
+- [ ] improve `back to top`, it stops on 2nd item instead of the first item
+- [ ] validate the `Uncaught TypeError: e.getBoundingClientRect is not a function` error
+- [ ]
+- [ ]
+
+# "client" notes
+
+## to improve
+
+##
